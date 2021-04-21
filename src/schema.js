@@ -1,15 +1,5 @@
-const { GraphQLObjectType, GraphQLSchema } = require("graphql");
-
-const QueryType = new GraphQLObjectType({
-  name: "Query",
-  description: "TODO",
-  fields: () => ({
-    query: {
-      type: QueryType,
-      resolve: (...args) => args,
-    },
-  }),
-});
+const { GraphQLSchema } = require("graphql");
+const { QueryType } = require("./types/QueryType");
 
 const schema = new GraphQLSchema({
   query: QueryType,
