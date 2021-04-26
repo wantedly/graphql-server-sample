@@ -5,7 +5,9 @@ const getProjects = async () => {
 }
 
 const getProjectById = async (id) => {
-  const foundProject = projects.find(p => p.id.to_s === id.to_s)
+  const foundProject = projects.find(p => {
+    return p.id.toString() === id.toString();
+  })
   return foundProject;
 }
 
