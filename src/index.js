@@ -7,9 +7,14 @@ const app = express();
 
 app.use(cors());
 
-app.use('/graphql', graphqlHTTP({
-  graphiql: true,
-  schema,
-}));
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    graphiql: true,
+    schema,
+  })
+);
 
-app.listen(4000, () => console.log('Express GraphQL Server Now Running On localhost:4000/graphql'));
+app.listen(4000, () =>
+  console.log("Express GraphQL Server Now Running On localhost:4000/graphql")
+);

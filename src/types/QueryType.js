@@ -1,4 +1,10 @@
-const { GraphQLObjectType, GraphQLSchema, GraphQLList, GraphQLID, GraphQLNonNull } = require("graphql");
+const {
+  GraphQLObjectType,
+  GraphQLSchema,
+  GraphQLList,
+  GraphQLID,
+  GraphQLNonNull,
+} = require("graphql");
 const { getProjects, getProjectById } = require("../services/projects");
 const { ProjectType } = require("./ProjectType");
 
@@ -9,7 +15,7 @@ const QueryType = new GraphQLObjectType({
       type: new GraphQLList(ProjectType),
       description: "募集一覧を返すクエリ",
       resolve: async () => {
-        const projects = await getProjects()
+        const projects = await getProjects();
         return projects;
       },
     },
@@ -19,16 +25,16 @@ const QueryType = new GraphQLObjectType({
       args: {
         id: {
           type: new GraphQLNonNull(GraphQLID),
-        }
+        },
       },
       resolve: async (_, args) => {
-        const project = await getProjectById(args.id)
-        if(!project) {
+        const project = await getProjectById(args.id);
+        if (!project) {
           throw new Error("募集が見つかりませんでした");
         }
         return project;
       },
-    }
+    },
   }),
 });
 
