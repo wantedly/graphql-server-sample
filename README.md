@@ -1,7 +1,7 @@
 # GraphQL Server Sample
 
 GraphQL Server のサンプルです。
-募集の一覧とIDごとの募集を取得するクエリが定義されています。
+募集の一覧と ID ごとの募集を取得するクエリが定義されています。
 
 ## Getting Started
 
@@ -16,7 +16,7 @@ GraphQL Server のサンプルです。
 
 ```graphql
 query {
-  projects {
+  projects(keyword: "") {
     id
     title
     whyDescription
@@ -32,6 +32,9 @@ query {
   }
 }
 ```
+
+キーワードを指定することで、募集のタイトルにマッチする募集を取得することができます。
+keyword の指定がない場合は全ての募集を取得します。
 
 ### 募集詳細の取得
 
