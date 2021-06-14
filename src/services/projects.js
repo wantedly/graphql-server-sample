@@ -11,7 +11,15 @@ const getProjectById = async (id) => {
   return foundProject;
 };
 
+const searchProjectsByKeyword = async (keyword) => {
+  return projects.filter(
+    (project) =>
+      project.title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+  );
+};
+
 module.exports = {
   getProjects,
   getProjectById,
+  searchProjectsByKeyword,
 };

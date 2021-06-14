@@ -4,8 +4,13 @@ const {
   GraphQLList,
   GraphQLID,
   GraphQLNonNull,
+  GraphQLString,
 } = require("graphql");
-const { getProjects, getProjectById } = require("../services/projects");
+const {
+  getProjects,
+  getProjectById,
+  searchProjectsByKeyword,
+} = require("../services/projects");
 const { ProjectType } = require("./ProjectType");
 
 const QueryType = new GraphQLObjectType({
@@ -14,9 +19,18 @@ const QueryType = new GraphQLObjectType({
     projects: {
       type: new GraphQLList(ProjectType),
       description: "募集一覧を返すクエリ",
-      resolve: async () => {
-        const projects = await getProjects();
-        return projects;
+      args: {
+        keyword: {
+          type: GraphQLString,
+        },
+      },
+      resolve: async (_, args) => {
+        if (!args.keyword) {
+          const projects = await getProjects();
+          return projects;
+        }
+        const matched = await searchProjectsByKeyword(args.keyword);
+        return matched;
       },
     },
     project: {
